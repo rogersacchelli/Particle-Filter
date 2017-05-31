@@ -134,6 +134,9 @@ void ParticleFilter::updateWeights(double sensor_range, double std_landmark[],
 			
 				// const double dist_x = pow(x_t - map_landmarks.landmark_list[k].x_f, 2) / (2 * std_landmark[0] * std_landmark[0]);
 				// const double dist_y = pow(y_t - map_landmarks.landmark_list[k].y_f, 2) / (2 * std_landmark[1] * std_landmark[1]);
+
+				// TODO: replace particles[i]. to closest to x_t map landmark and the same for y_t
+				 
 				const double diff_x = pow(x_t - particles[i].x, 2) / (2 * std_landmark[0] * std_landmark[0]);
 				const double diff_y = pow(y_t - particles[i].y, 2) / (2 * std_landmark[1] * std_landmark[1]);	
 				particles[i].weight*= exp(-(diff_x + diff_y)) * den_weight;
@@ -141,7 +144,7 @@ void ParticleFilter::updateWeights(double sensor_range, double std_landmark[],
 				std::cout << "predicted - X: " << particles[i].x << " y: " << particles[i].y << " theta: " << particles[i].theta << std::endl;
 				std::cout << "observed - X: " << observations[j].x << " y: " << observations[j].y << std::endl;
 				std::cout << "particle: " << i << " observation: " << j << " x_t: " << x_t << " y_t: " << y_t << " dist_x: " << diff_x << " 	dist_y: " 
-				<< diff_y << " weight_particle: " << particles[i].weight << " sensor_distance: " << sensor_distance << std::endl;
+				<< diff_y << " weight_particle: " << particles[i].weight << " sensor_distance: " << sensor_distance  << std::endl;
 
 			}
 
