@@ -18,6 +18,9 @@ struct Particle {
 	double y;
 	double theta;
 	double weight;
+	std::vector<int> associations;
+	std::vector<double> sense_x;
+	std::vector<double> sense_y;
 };
 
 
@@ -94,18 +97,21 @@ public:
 	 *   the new set of particles.
 	 */
 	void resample();
-	
-	/*
-	 * write Writes particle positions to a file.
-	 * @param filename File to write particle positions to.
-	 */
+
 	void write(std::string filename);
+
+	Particle SetAssociations(Particle particle, std::vector<int> associations, std::vector<double> sense_x, std::vector<double> sense_y);
 	
+		std::string getAssociations(Particle best);
+		std::string getSenseX(Particle best);
+		std::string getSenseY(Particle best);
+
 	/**
 	 * initialized Returns whether particle filter is initialized yet or not.
 	 */
 	const bool initialized() const {
 		return is_initialized;
+
 	}
 };
 
