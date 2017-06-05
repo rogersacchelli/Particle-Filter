@@ -17,6 +17,12 @@
 
 #include "particle_filter.h"
 
+/* *******************************************
+	PROJECT SUBMISSION FOR CAR ND
+   	STUDENT: ROGER SACCHELLI
+   ******************************************* */
+
+
 using namespace std;
 
 void ParticleFilter::init(double x, double y, double theta, double std[]) {
@@ -168,7 +174,7 @@ void ParticleFilter::updateWeights(double sensor_range, double std_landmark[],
 		w+=particles[i].weight;
 	}
 
-	// Weights normalization to sum(weights)=1
+	// Weights norm
 	for (int i = 0; i < num_particles; i++){
 		particles[i].weight /= w * (2 * M_PI * std_landmark[0] * std_landmark[1]);
 		weights[i] = particles[i].weight;
@@ -191,15 +197,6 @@ void ParticleFilter::resample() {
     particles = resampled_particles;
 }
 
-void ParticleFilter::write(std::string filename) {
-	// You don't need to modify this file.
-	std::ofstream dataFile;
-	dataFile.open(filename, std::ios::app);
-	for (int i = 0; i < num_particles; ++i) {
-		dataFile << particles[i].x << " " << particles[i].y << " " << particles[i].theta << "\n";
-	}
-	dataFile.close();
-}
 
 Particle ParticleFilter::SetAssociations(Particle particle, std::vector<int> associations, std::vector<double> sense_x, std::vector<double> sense_y)
 {
@@ -247,3 +244,4 @@ string ParticleFilter::getSenseY(Particle best)
     s = s.substr(0, s.length()-1);  // get rid of the trailing space
     return s;
 }
+
